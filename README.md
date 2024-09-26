@@ -2,9 +2,7 @@
 
 它是基于vue3开发的一款甘特图UI库；
 
-![](./public/gantt.gif)
-
-
+![](./public/gantt.png)
 
 ## 安装：
 
