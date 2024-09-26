@@ -2,6 +2,10 @@
 
 它是基于vue3开发的一款甘特图UI库；
 
+![](./public/gantt.gif)
+
+
+
 ## 安装：
 
 ```bash\

@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-// import {
-//   Gantt,
-//   type GanttDataProps,
-//   type GanttHeadProps,
-//   type GanttRefProps,
-// } from '../packages/Gantt/index'
 import {
   Gantt,
   type GanttDataProps,
   type GanttHeadProps,
   type GanttRefProps,
-} from 'gantt-custom'
-import 'gantt-custom/style.css'
+} from '../packages/Gantt/index'
+// import {
+//   Gantt,
+//   type GanttDataProps,
+//   type GanttHeadProps,
+//   type GanttRefProps,
+// } from 'gantt-custom'
+// import 'gantt-custom/style.css'
 
 const list = ref<GanttDataProps[]>([]);
 const head: GanttHeadProps[] = [
