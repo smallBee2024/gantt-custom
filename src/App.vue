@@ -1,23 +1,21 @@
 <script setup lang="ts">
-// import HelloWorld from './components/HelloWorld.vue'
-// import { HelloWorld } from '../dist/gantt.es.js'
 import { ref, onMounted } from 'vue'
-// import '../dist/style.css'
-// import { Gantt } from '../dist/gantt.es'
-// import type {
-//   GanttDataProps,
-//   GanttHeadProps,
-//   GanttRefProps,
-// } from '../dist/gantt.es'
-import { Gantt } from '../packages/Gantt/index'
-import type {
-  GanttDataProps,
-  GanttHeadProps,
-  GanttRefProps,
-} from '../packages/Gantt/index'
+// import {
+//   Gantt,
+//   type GanttDataProps,
+//   type GanttHeadProps,
+//   type GanttRefProps,
+// } from '../packages/Gantt/index'
+import {
+  Gantt,
+  type GanttDataProps,
+  type GanttHeadProps,
+  type GanttRefProps,
+} from 'gantt-custom'
+import 'gantt-custom/style.css'
 
 const list = ref<GanttDataProps[]>([]);
-  const head: GanttHeadProps[] = [
+const head: GanttHeadProps[] = [
   {
     fieldName: "人数",
     fieldTag: "num",
@@ -34,10 +32,8 @@ const list = ref<GanttDataProps[]>([]);
     width: '100px',
   },
 ]
-
 const ganttRef = ref<GanttRefProps>()
 const ganttType = ref('day')
-
 
 function getUUID() {
   let uuid = '';
@@ -56,10 +52,9 @@ function getUUID() {
 
   return uuid;
 }
-
+// 拖拽结束：修改时间轴数据
 const onDateChange = (params: any) => {
-  console.log('app.vue', params);
-
+  console.log('onDateChange', params);
   list.value = list.value.map((item: GanttDataProps) => {
     if (item.id == params.id) {
       return {
@@ -72,49 +67,44 @@ const onDateChange = (params: any) => {
   })
 }
 const onDataClick = (params: any) => {
-  console.log('app.vue', params);
+  console.log('onDataClick', params);
   alert('点击了')
 }
+// 切换甘特图时间维度
 const onGanttTypeChange = (type: string) => {
   ganttType.value = type
 }
+// 异步获取数据
+const getData = () => {
+  setTimeout(() => {
+    list.value = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3].map((item, index) => {
+      return {
+        startTime: index % 2 == 1 ? "2024-9-10" : '2024-9-19',
+        endTime: index % 2 == 1 ? "2024-9-18" : '2024-9-21',
+        finishTime: null,
+        dept: "技术部",
+        num: "2人",
+        time: "2天",
+        start: true,
+        time2: "结束时间",
+        id: getUUID()
+      }
+    })
+  });
+}
 
 onMounted(() => {
-  // console.log('a=', Gant)
-  list.value = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3].map((item, index) => {
-    return {
-      startTime: index % 2 == 1 ? "2024-9-10" : '2024-9-19',
-      endTime: index % 2 == 1 ? "2024-9-18" : '2024-9-21',
-      finishTime: null,
-      dept: "技术部",
-      num: "2人",
-      time: "2天",
-      start: true,
-      time2: "结束时间",
-      id: getUUID()
-    }
-  })
-
-  console.log('a=', list.value)
+  getData()
 })
 </script>
 
 <template>
-  <!-- <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" /> -->
   <div class="app-wrapper">
     <Gantt
       :head="head"
       :data="list"
       :ganttType="ganttType"
-      height="calc(100% - 46px)"
+      height="100%"
       @onDateChange="onDateChange"
       @onDataClick="onDataClick"
       @onGanttTypeChange="onGanttTypeChange"
@@ -126,6 +116,7 @@ onMounted(() => {
 .app-wrapper {
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
   padding: 30px;
   position: absolute;
   top: 0;

@@ -1,5 +1,4 @@
 export type ScrollDirection = 'left' | 'right' | '';
-
 export type GanttType = 'day' | 'week' | 'month' | 'quarter';
 
 export interface GanttDataProps {
@@ -16,6 +15,7 @@ export interface GanttHeadProps {
   width?: string;
   key?: string;
   align?: 'center' | 'left' | 'right';
+  [key: string]: any;
 }
 
 export interface IListIF extends GanttDataProps {
@@ -27,11 +27,11 @@ export interface IListIF extends GanttDataProps {
 
 export interface GanttProps {
   /**
-   * 数据 ✅
+   * 数据
    */
-  data: any[];
+  data: GanttDataProps[];
   /**
-   * 表头 ✅
+   * 表头
    */
   head?: GanttHeadProps[];
   /**
@@ -39,7 +39,7 @@ export interface GanttProps {
    */
   ganttType?: GanttType;
   /**
-   * 高度： 甘特图 跟元素容器高度 ✅
+   * 高度： 甘特图 跟元素容器高度
    */
   height?: string;
   /**

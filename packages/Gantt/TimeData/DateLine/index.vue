@@ -478,7 +478,7 @@ const onMarginMouseUp = () => {
   position: absolute;
   top: 50%;
   left: 0;
-  z-index: 2;
+  // z-index: 2;
   display: flex;
   align-items: center;
   border-radius: 6px;
